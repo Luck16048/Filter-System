@@ -1,9 +1,35 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.entity.Nationality;
+import org.example.entity.Person;
+import org.example.entity.Sex;
+
+
 public class Main {
     public static void main(String[] args) {
+        Person[] people = new Person[]{
+                new Person("Alice", 25, Sex.FEMALE, Nationality.AFGHANISTAN),
+                new Person("Bob", 15, Sex.MALE, Nationality.AFGHANISTAN),
+                new Person("Clara", 22, Sex.FEMALE, Nationality.GERMANY),
+                new Person("David", 28, Sex.MALE, Nationality.USA),
+                new Person("Eva", 35, Sex.FEMALE, Nationality.CANADA),
+                new Person("Frank", 40, Sex.MALE, Nationality.GERMANY),
+                new Person("Grace", 27, Sex.FEMALE, Nationality.USA),
+                new Person("Henry", 33, Sex.MALE, Nationality.CANADA),
+                new Person("Isabella", 24, Sex.FEMALE, Nationality.GERMANY),
+                new Person("Jack", 29, Sex.MALE, Nationality.USA),
+                new Person("Sophia", 31, Sex.FEMALE, Nationality.CANADA),
+                new Person("Liam", 38, Sex.MALE, Nationality.GERMANY)
+        };
+
+        print(people);
+    }
+
+    public static void print(Person[] people) {
+        for (Person person : people) {
+            System.out.println(person.getName() + " " + person.getAge() + " " + person.getSex() + " " + person.getNationality());
+
+        }
 
     }
 }
