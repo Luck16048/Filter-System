@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.entity.Nationality;
-import org.example.entity.PassportStrength;
-import org.example.entity.Person;
-import org.example.entity.Sex;
+import org.example.entity.*;
 
 import java.util.*;
 
@@ -43,6 +40,9 @@ public class Main {
 
         System.out.println("--- GROUP BY SEX ---");
         printMap(groupBySex(people));
+
+        System.out.println("--- GROUP BY AGE ---");
+        printMap(groupByAge(people));
     }
 
     public static void print(Person[] people) {
@@ -132,6 +132,31 @@ public class Main {
                     map.put(Sex.FEMALE, new ArrayList<>());
                 }
                 map.get(Sex.FEMALE).add(p);
+            }
+        }
+        return map;
+    }
+
+    public static Map<Adulthood, List<Person>> groupByAge(Person[] people) {
+        Map<Adulthood, List<Person>> map = new HashMap<>();
+
+        int sum = 0;
+        for (Person p : people) {
+            sum = sum + p.getAge();
+        }
+        int average = sum / people.length;
+
+        for (Person p : people) {
+            if (p.getAge() < average) {
+                if (!map.containsKey(Adulthood.YOUNG)) {
+                    map.put(Adulthood.YOUNG, new ArrayList<>());
+                }
+                map.get(Adulthood.YOUNG).add(p);
+            } else {
+                if (!map.containsKey(Adulthood.OLD)) {
+                    map.put(Adulthood.OLD, new ArrayList<>());
+                }
+                map.get(Adulthood.OLD).add(p);
             }
         }
         return map;
