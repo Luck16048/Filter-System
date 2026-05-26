@@ -33,6 +33,9 @@ public class Main {
 
         System.out.println("--- Afghanistan (14+ and sex male) ---");
         print(filterByCanDrinkAlcoholInAfghanistan(people));
+
+        System.out.println("--- USA or Canada ---");
+        print(filterByCanFreelySpeakEnglish(people));
     }
 
     public static void print(Person[] people) {
@@ -66,6 +69,16 @@ public class Main {
         ArrayList<Person> list = new ArrayList<>();
         for (Person p : people) {
             if (p.getAge() >= 14 && p.getSex() == Sex.MALE) {
+                list.add(p);
+            }
+        }
+        return list.toArray(new Person[0]);
+    }
+
+    public static Person[] filterByCanFreelySpeakEnglish(Person[] people) {
+        ArrayList<Person> list = new ArrayList<>();
+        for (Person p : people) {
+            if (p.getNationality() == Nationality.USA || p.getNationality() == Nationality.CANADA) {
                 list.add(p);
             }
         }
