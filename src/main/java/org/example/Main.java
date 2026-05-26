@@ -4,6 +4,8 @@ import org.example.entity.Nationality;
 import org.example.entity.Person;
 import org.example.entity.Sex;
 
+import java.util.ArrayList;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +25,8 @@ public class Main {
         };
 
         print(people);
+
+        print(filterByCanDrinkAlcoholInGermany(people));
     }
 
     public static void print(Person[] people) {
@@ -30,6 +34,15 @@ public class Main {
             System.out.println(person.getName() + " " + person.getAge() + " " + person.getSex() + " " + person.getNationality());
 
         }
+    }
 
+    public static Person[] filterByCanDrinkAlcoholInGermany(Person[] people) {
+        ArrayList<Person> list = new ArrayList<>();
+        for (Person p : people) {
+            if (p.getAge() >= 16) {
+                list.add(p);
+            }
+        }
+        return list.toArray(new Person[0]);
     }
 }
