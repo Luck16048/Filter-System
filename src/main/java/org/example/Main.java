@@ -1,10 +1,11 @@
 package org.example;
 
 import org.example.entity.Nationality;
+import org.example.entity.PassportStrength;
 import org.example.entity.Person;
 import org.example.entity.Sex;
 
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class Main {
@@ -36,6 +37,9 @@ public class Main {
 
         System.out.println("--- USA or Canada ---");
         print(filterByCanFreelySpeakEnglish(people));
+
+        System.out.println("--- WEAK AND STRONG ---");
+        printMap(groupByPassportStrength(people));
     }
 
     public static void print(Person[] people) {
@@ -83,5 +87,32 @@ public class Main {
             }
         }
         return list.toArray(new Person[0]);
+    }
+
+    public static Map<PassportStrength, List<Person>> groupByPassportStrength(Person[] people) {
+        HashMap<PassportStrength, List<Person>> map = new HashMap<>();
+        for (Person p : people) {
+            if (p.getNationality() == Nationality.AFGHANISTAN) {
+                if (!map.containsKey(PassportStrength.WEAK)) {
+                    map.put(PassportStrength.WEAK, new ArrayList<>());
+                }
+                map.get(PassportStrength.WEAK).add(p);
+            } else {
+                if (!map.containsKey(PassportStrength.STRONG)) {
+                    map.put(PassportStrength.STRONG, new ArrayList<>());
+                }
+                map.get(PassportStrength.STRONG).add(p);
+            }
+        }
+        return map;
+    }
+
+    public static void printMap(Map<PassportStrength, List<Person>> map) {
+        for (Map.Entry<PassportStrength, List<Person>> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ":");
+            for (Person p : entry.getValue()) {
+                System.out.println(" " + p);
+            }
+        }
     }
 }

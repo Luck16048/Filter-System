@@ -28,4 +28,9 @@ public class Person {
     public Nationality getNationality() {
         return this.nationality;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + age + " " + sex + " " + nationality;
+    }
 }
