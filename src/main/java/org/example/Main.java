@@ -40,6 +40,9 @@ public class Main {
 
         System.out.println("--- WEAK AND STRONG ---");
         printMap(groupByPassportStrength(people));
+
+        System.out.println("--- GROUP BY SEX ---");
+        printMap(groupBySex(people));
     }
 
     public static void print(Person[] people) {
@@ -107,12 +110,30 @@ public class Main {
         return map;
     }
 
-    public static void printMap(Map<PassportStrength, List<Person>> map) {
-        for (Map.Entry<PassportStrength, List<Person>> entry : map.entrySet()) {
+    public static void printMap(Map<?, List<Person>> map) {
+        for (Map.Entry<?, List<Person>> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ":");
             for (Person p : entry.getValue()) {
                 System.out.println(" " + p);
             }
         }
+    }
+
+    public static Map<Sex, List<Person>> groupBySex(Person[] people) {
+        Map<Sex, List<Person>> map = new HashMap<>();
+        for (Person p : people) {
+            if (p.getSex() == Sex.MALE) {
+                if (!map.containsKey(Sex.MALE)) {
+                    map.put(Sex.MALE, new ArrayList<>());
+                }
+                map.get(Sex.MALE).add(p);
+            } else {
+                if (!map.containsKey(Sex.FEMALE)) {
+                    map.put(Sex.FEMALE, new ArrayList<>());
+                }
+                map.get(Sex.FEMALE).add(p);
+            }
+        }
+        return map;
     }
 }
