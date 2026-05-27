@@ -43,6 +43,9 @@ public class Main {
 
         System.out.println("--- GROUP BY AGE ---");
         printMap(groupByAge(people));
+
+        System.out.println("--- GROUP BY FREELY SPEAK ENGLISH ---");
+        System.out.println(groupByCanFreelySpeakEnglish(people));
     }
 
     public static void print(Person[] people) {
@@ -159,6 +162,23 @@ public class Main {
                 map.get(Adulthood.OLD).add(p);
             }
         }
+        return map;
+    }
+
+    public static Map<Boolean, Integer> groupByCanFreelySpeakEnglish(Person[] people) {
+        Map<Boolean, Integer> map = new HashMap<>();
+        int trueCount = 0;
+        int falseCount = 0;
+
+        for (Person p : people) {
+            if ((p.getNationality() == Nationality.CANADA || p.getNationality() == Nationality.USA) && p.getAge() >= 4) {
+                trueCount++;
+            } else {
+                falseCount++;
+            }
+        }
+        map.put(true, trueCount);
+        map.put(false, falseCount);
         return map;
     }
 }
